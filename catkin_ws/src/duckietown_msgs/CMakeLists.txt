@@ -74,6 +74,7 @@ add_message_files(
   TrafficLightDetection.msg
   VehicleDetection.msg
   FSMState.msg
+  AntiInstagramHealth.msg
 )
 
 ## Generate services in the 'srv' folder
