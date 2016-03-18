@@ -81,6 +81,7 @@ add_message_files(
   ObstacleType.msg
   ObstacleImageDetection.msg
   ObstacleImageDetectionList.msg
+  Trajectory.msg
 )
 
 ## Generate services in the 'srv' folder
