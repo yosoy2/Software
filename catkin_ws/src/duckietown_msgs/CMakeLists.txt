@@ -78,6 +78,9 @@ add_message_files(
   AntiInstagramHealth.msg
   BoolStamped.msg
   StopLineReading.msg
+  ObstacleType.msg
+  ObstacleImageDetection.msg
+  ObstacleImageDetectionList.msg
 )
 
 ## Generate services in the 'srv' folder
