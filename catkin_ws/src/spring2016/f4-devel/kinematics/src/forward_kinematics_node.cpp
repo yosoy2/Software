@@ -1,21 +1,9 @@
 #include "ros/ros.h" // main ROS include
-#include "std_msgs/Float32.h" // number message datatype
 #include <ros/console.h>
-#include <yaml-cpp/yaml.h>
-#include <boost/filesystem.hpp>
-#include "geometry_msgs/Point.h"
-#include "duckietown_msgs/WheelsCmd.h"
 #include "duckietown_msgs/WheelsCmdStamped.h"
-#include "geometry_msgs/Pose2D.h"
 #include "duckietown_msgs/Pose2DStamped.h"
 #include "duckietown_msgs/Twist2DStamped.h"
-#include "duckietown_msgs/Vector2D.h"
-#include <visualization_msgs/Marker.h>
-#include <std_srvs/Empty.h>
-#include <cmath> // needed for nan
-#include <stdint.h>
 #include <string>
-#include <fstream>
 using namespace std;
 
 class forward_kinematics_node
@@ -40,7 +28,7 @@ private:
   double radius_r_; // radius of the right wheel
   double baseline_lr_; //distance between the center of the two wheels
 
-  uint32_t previousTimestamp_;
+  ros::Time previousTimestamp_;
   duckietown_msgs::Pose2DStamped odomPose_;
 
   // callback function declarations
@@ -63,8 +51,8 @@ forward_kinematics_node::forward_kinematics_node() : nh_("~"), node_name_("forwa
 {
 
   //Get parameters
-  nh_.param("K_l", K_l_, 0.1);
-  nh_.param("K_r", K_r_, 0.1);
+  nh_.param("K_l", K_l_, 25.0);
+  nh_.param("K_r", K_r_, 25.0);
   nh_.param("radius_l", radius_l_, 0.02);
   nh_.param("radius_r", radius_r_, 0.02);
   nh_.param("baseline_lr", baseline_lr_, 0.1);
@@ -106,9 +94,9 @@ void forward_kinematics_node::wheelsCmdCallback(duckietown_msgs::WheelsCmdStampe
 
   // Compute the final pose by integration
   // We should skip the first odometry message because we won't know the delta t
-  if(previousTimestamp_ > 0)
+  if(previousTimestamp_.toSec() > 0)
   {
-    double deltaT = (msg->header.stamp.nsec - previousTimestamp_) *1.0e-9;
+    double deltaT = (msg->header.stamp - previousTimestamp_).toSec();
     double theta_tm1 = odomPose_.theta; // orientation at time t
     double theta_t = theta_tm1 + omega * deltaT; // orientation at time t+1
 
@@ -130,5 +118,5 @@ void forward_kinematics_node::wheelsCmdCallback(duckietown_msgs::WheelsCmdStampe
     //Publish the pose message
     pub_vehiclePose_.publish(odomPose_);
   }
-  previousTimestamp_ = msg->header.stamp.nsec; // update time for next integration
+  previousTimestamp_ = msg->header.stamp; // update time for next integration
   }
