@@ -108,13 +108,13 @@ digraph D {
 	
 
 
-	subgraph cluster_f1{
-		!FEATURE!
-		label="F1: Illumination Robustness"; 
-		anti_instagram_node[!NODE:development!,  label="anti_instagram\nanti_instagram_node (F1)"];
-		corrected_image[!TOPIC!, label="~corrected_image/raw\nsensor_msgs/Image.msg"];
-		image_health[!TOPIC!, label="~image_health\nduckietown_msgs/AntiInstagramHealth.msg"];
-	}
+	//subgraph cluster_f1{
+	//	!FEATURE!
+	//	label="F1: Illumination Robustness"; 
+	//	anti_instagram_node[!NODE:development!,  label="anti_instagram\nanti_instagram_node (F1)"];
+	//	corrected_image[!TOPIC!, label="~corrected_image/raw\nsensor_msgs/Image.msg"];
+	//	image_health[!TOPIC!, label="~image_health\nduckietown_msgs/AntiInstagramHealth.msg"];
+	//}
 
 	subgraph cluster_f23 {
 		!FEATURE!
@@ -243,7 +243,7 @@ digraph D {
 		
 	// == line_detector_node == //
 	line_detector_node -> {segment_list, image_with_lines};
-	corrected_image -> line_detector_node;
+	image_compressed -> line_detector_node;
 
 	// == global_localizer == //
 	//{obj_detection, street_name_detection, apriltag_detection, map_representation} -> global_localizer;
@@ -344,7 +344,7 @@ digraph D {
 /////////// F6 //
 
 	// == vehicle_detector_node == //
-	corrected_image -> vehicle_detector_node;
+	image_compressed -> vehicle_detector_node;
 	vehicle_detector_node -> veh_corners;
 	// == vehicle_filter_node == //
 	{veh_corners, camera_info} -> vehicle_filter_node;
