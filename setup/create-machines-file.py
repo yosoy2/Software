@@ -45,8 +45,8 @@ def create_machines(scuderia_contents):
 	
 	def make_line(name):
 		space = " "*(13-len(name))
-		p = p = """<machine name="%s"  %s address="%s.local" %s user=""" + username +  """ env-loader="$(arg env_script_path)"/>"""
-		return p % (name, space, name, space)
+		p = p = """<machine name="%s"  %s address="%s.local" %s user="%s" env-loader="$(arg env_script_path)"/>"""
+		return p % (name, space, name, space, username)
 
 	names = sorted(scuderia_contents)
 

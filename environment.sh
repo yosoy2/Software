@@ -3,18 +3,23 @@
 echo "Activating ROS "$ROS_DISTRO"..."
 source /opt/ros/$ROS_DISTRO/setup.bash
 echo "...done."
+echo
 
 echo "Setting up PYTHONPATH."
-echo "Note: We assume you cloned the Software repository in the folder 'duckietow' at home"
+echo "Note: We assume you cloned the Software repository in the folder 'duckietown' at home"
 export PYTHONPATH=$HOME/duckietown/catkin_ws/src:$PYTHONPATH
+echo
 
 echo "Setup ROS_HOSTNAME."
 export ROS_HOSTNAME=$HOSTNAME.local
 export DUCKIETOWN_ROOT=$HOME/duckietown
+echo
 
 echo "Building machines file..."
 make -C  $DUCKIETOWN_ROOT
 echo "...done"
+echo
+
 echo "Activating development."
 source $DUCKIETOWN_ROOT/catkin_ws/devel/setup.bash
 
