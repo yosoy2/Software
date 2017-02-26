@@ -1,8 +1,7 @@
-# Software
+# Duckietown Engineering Chile - Fall 2017 branch
 
-In this repository we will collect all the software, middleware, drivers, ROS modules, and so on, that would allow to run our cars. 
+This is a simplified branch to facilitate the work of the new engineers in training during Fall semester 2017.
 
-The activity in this repo should be posted automatically to the channel #bot-github.
+Please refer the [original repository](ttps://www.github.com/duckietown/Software) for the complete code. 
 
 -----
-
