@@ -1,11 +1,12 @@
 #!/bin/bash
 
-echo "Activating ROS..."
-source /opt/ros/kinetic/setup.bash
+echo "Activating ROS "$ROS_DISTRO"..."
+source /opt/ros/$ROS_DISTRO/setup.bash
 echo "...done."
 
 echo "Setting up PYTHONPATH."
-export PYTHONPATH=/home/ubuntu/duckietown/catkin_ws/src:$PYTHONPATH
+echo "Note: We assume you cloned the Software repository in the folder 'duckietow' at home"
+export PYTHONPATH=$HOME/duckietown/catkin_ws/src:$PYTHONPATH
 
 echo "Setup ROS_HOSTNAME."
 export ROS_HOSTNAME=$HOSTNAME.local

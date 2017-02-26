@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import logging
+import os
 logging.basicConfig()
 logger = logging.getLogger(__name__)
-
+username = os.getenv('USER')
 
 class MyExc(Exception):
 	pass
@@ -44,7 +45,7 @@ def create_machines(scuderia_contents):
 	
 	def make_line(name):
 		space = " "*(13-len(name))
-		p = """<machine name="%s"  %s address="%s.local" %s user="ubuntu" env-loader="$(arg env_script_path)"/>"""
+		p = p = """<machine name="%s"  %s address="%s.local" %s user=""" + username +  """ env-loader="$(arg env_script_path)"/>"""
 		return p % (name, space, name, space)
 
 	names = sorted(scuderia_contents)
