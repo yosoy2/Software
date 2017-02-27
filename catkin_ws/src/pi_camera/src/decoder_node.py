@@ -7,6 +7,8 @@ from sensor_msgs.msg import CompressedImage,Image
 from duckietown_msgs.msg import BoolStamped
 import time
 
+(major, minor, _) = cv2.__version__.split(".")
+
 # bridge = CvBridge()
 # publisher = None
 
@@ -42,7 +44,11 @@ class DecoderNode(object):
             self.last_stamp = now
         # time_start = time.time()
         np_arr = np.fromstring(msg.data, np.uint8)
-        cv_image = cv2.imdecode(np_arr, cv2.CV_LOAD_IMAGE_COLOR)
+
+	if major=='2':
+        	cv_image = cv2.imdecode(np_arr, cv2.CV_LOAD_IMAGE_COLOR)
+	else:
+		cv_image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
         # time_1 = time.time()
         img_msg = self.bridge.cv2_to_imgmsg(cv_image, "bgr8")
         # time_2 = time.time()
