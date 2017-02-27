@@ -3,8 +3,7 @@
 
 # if the vehicle name is not set, exit
 if [ -z "$VEHICLE_NAME" ]; then
-  echo "VEHICLE_NAME is not set. Please run 'source set_vehicle_name.sh' script before enabling the hotspot"
-  exit
+  echo "VEHICLE_NAME is not set. Please run 'source set_vehicle_name.sh' before enabling the hotspot"
 
 # if the vehicle name is set but no hotspot is active, enable the hotspot
 else 
