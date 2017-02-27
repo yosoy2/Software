@@ -9,14 +9,14 @@ if [ -z "$VEHICLE_NAME" ]; then
 # if the vehicle name is set but no hotspot is active, enable the hotspot
 else 
   if [ -z "$HOTSPOT" ]; then
-    # vehicle name is set, create hotspot-ssid variable
+    # vehicle name is set, create hotspot variable and enable hotspot with nmcli
     export HOTSPOT="$VEHICLE_NAME-wifi"
 
     echo "Enabling hotspot $HOTSPOT..."
     nmcli device wifi hotspot con-name $HOTSPOT ssid $HOTSPOT band bg password quackquack
     echo "$HOTSPOT enabled."
 
-    # if the hotspot variable exists, we considered it as active, so we disable it
+    # if the hotspot variable already exists, we considered the hotspot as active, so we disable it
   else
     echo "Disabling hotspot $HOTSPOT..."
     nmcli connection down $HOTSPOT
