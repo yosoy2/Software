@@ -1,10 +1,23 @@
 #!/usr/bin/env bash
-#All the commands used to get from 2015-04-06-ubuntu-trusty.img to 2016-01-10_duckiebot.img
+# All the commands used to get from ubuntu-mate-16.04-desktop-armhf-raspberry-pi.img to 2017-fall-duckiebot.img
 
-# Update and upgrade # This might take a while
+# This version prepares the duckiebot image with the following features:
+# - Raspberry Pi 3
+# - Ubuntu 16.04
+# - ROS Kinetic
+# - Duckiebot Shield v2.0
+
+# ==== Create swap ====#
+sudo dd if=/dev/zero of=/swap0 bs=1M count=512 # This is for a 512 MB swap space.
+sudo mkswap /swap0
+sudo echo "/swap0 swap swap" >> /etc/fstab
+sudo swapon -a
+
+# === Update ==== #
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+# ==== Networking stuff ==== #
 # Install openssh-server for ssh
 sudo apt-get install openssh-server -y
 
@@ -18,24 +31,34 @@ sudo ntpdate -u us.pool.ntp.org
 sudo apt-get install -y build-essential git python python-dev ipython python-pip
 sudo apt-get install -y vim htop byobu libav-tools curl
 
-# === Install ROS following http://wiki.ros.org/indigo/Installation/UbuntuARM ===
+# === Install ROS Kinetic ==== #
+# Following the usual installation instructions from http://wiki.ros.org/kinetic/Installation/Ubuntu
+
 # Setup locale, deb, and keys
 sudo update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
-wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+
 # Install ROS
 sudo apt-get update
-sudo apt-get install ros-indigo-ros-base -y
+sudo apt-get install ros-kinetic-ros-base -y
 # Update rosdep
 sudo apt-get install python-rosdep
 sudo rosdep init
 rosdep update
 
 # === Bus and i2c ===
-sudo apt-get install -y i2c-tools python-smbus
-sudo usermod -a -G i2c ubuntu
+#sudo apt-get install -y i2c-tools python-smbus
+#sudo usermod -a -G i2c ubuntu
 # Trigger the rule (reboot will do this too)
-sudo udevadm trigger 
+#sudo udevadm trigger 
+
+# ==== Arduino Serial Comm ==== #
+sudo usermod -a -G dialout $USER
+sudo chmod a+rw /dev/ttyS0
+
+# This is for RPi3 only
+sudo echo "core_freq=250" >> /boot/config.txt
 
 # === PiCamera Stuff === #
 sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-{bin,dev,doc}
@@ -50,9 +73,6 @@ sudo usermod -a -G video ubuntu
 sudo pip install picamera
 sudo pip install "picamera[array]"
 
-# ==== ros_on_ras_with_cam_2016-01-09_1846.img at this point ==== #
-sudo apt-get install gfortran -y
-
 # ==== Wireless settings ==== #
 # Install firmware and tools
 sudo apt-get install wireless-tools wpasupplicant linux-firmware
@@ -64,23 +84,28 @@ printf 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n update_config=
 printf 'network={\n ssid="duckietown"\n scan_ssid=1\n psk="quackquack"\n priority=10\n}' | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 
 # Setup authorized keys for ssh access for duckietown
-cd ~
-mkdir .ssh
-chmod g-rwx,o-rwx .ssh 
-wget -O .ssh/authorized_keys https://www.dropbox.com/s/pxyou3qy1p8m4d0/duckietown_key1.pub?dl=1
+#cd ~
+#mkdir .ssh
+#chmod g-rwx,o-rwx .ssh 
+#wget -O .ssh/authorized_keys https://www.dropbox.com/s/pxyou3qy1p8m4d0/duckietown_key1.pub?dl=1
 
 #Add passwordless sudo for user ubuntu:
 # $ sudo visudo
 # Add line at the end:
 # ubuntu ALL=(ALL) NOPASSWD: ALL 
-
 # Select option (1) for byobu.
 
+# ==== ROS Packages ==== #
 # Install additional ROS pkgs to apt-get
-sudo apt-get install ros-indigo-{tf-conversions,cv-bridge,image-transport,camera-info-manager,theora-image-transport}
+sudo apt-get install ros-kinetic-{tf-conversions,cv-bridge,image-transport,camera-info-manager,theora-image-transport,image-geometry,image-proc}
 
 # List of additional system pkgs
-sudo apt-get install libyaml-cpp-dev
+sudo apt-get install libyaml-cpp-dev -y
+
+# sklearn dependencies
+sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran -y 
+sudo apt-get install python-numpy python-scipy -y
+sudo apt-get install python-sklearn -y
 
 # Remove the net rules to forget the mac address of ethernet and wireless cards
 rm /etc/udev/rules.d/70-persistent-net.rules
