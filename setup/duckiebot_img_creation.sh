@@ -12,7 +12,7 @@ echo "Creating swap..."
 echo
 sudo dd if=/dev/zero of=/swap0 bs=1M count=512 # This is for a 512 MB swap space.
 sudo mkswap /swap0
-sudo echo "/swap0 swap swap" >> /etc/fstab
+printf '/swap0 swap swap' | sudo tee -a /etc/fstab
 sudo swapon -a
 
 # === Update ==== #
