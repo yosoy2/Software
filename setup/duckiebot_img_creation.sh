@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # All the commands used to get from ubuntu-mate-16.04-desktop-armhf-raspberry-pi.img to 2017-fall-duckiebot.img
 
-# This version prepares the duckiebot image with the following features:
+# This version prepares the duckiebot image for a robot with the following features:
 # - Raspberry Pi 3
 # - Ubuntu 16.04
 # - ROS Kinetic
