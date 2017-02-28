@@ -8,16 +8,22 @@
 # - Duckiebot Shield v2.0
 
 # ==== Create swap ====#
+echo "Creating swap..."
+echo
 sudo dd if=/dev/zero of=/swap0 bs=1M count=512 # This is for a 512 MB swap space.
 sudo mkswap /swap0
 sudo echo "/swap0 swap swap" >> /etc/fstab
 sudo swapon -a
 
 # === Update ==== #
+echo "Updating system..."
+echo
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
 # ==== Networking stuff ==== #
+echo "Installing networking stuff..."
+echo
 # Install openssh-server for ssh
 sudo apt-get install openssh-server -y
 
@@ -28,11 +34,15 @@ sudo apt-get install avahi-daemon avahi-discover avahi-utils -y
 sudo ntpdate -u us.pool.ntp.org
 
 # === Extra stuff ===
+echo "Installing more packages..."
+echo
 sudo apt-get install -y build-essential git python python-dev ipython python-pip
 sudo apt-get install -y vim htop byobu libav-tools curl
 
 # === Install ROS Kinetic ==== #
 # Following the usual installation instructions from http://wiki.ros.org/kinetic/Installation/Ubuntu
+echo "Installing ROS kinetic..."
+echo
 
 # Setup locale, deb, and keys
 sudo update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
@@ -54,6 +64,8 @@ rosdep update
 #sudo udevadm trigger 
 
 # ==== Arduino Serial Comm ==== #
+echo "Configuring serial ports..."
+echo
 sudo usermod -a -G dialout $USER
 sudo chmod a+rw /dev/ttyS0
 
@@ -61,6 +73,9 @@ sudo chmod a+rw /dev/ttyS0
 sudo echo "core_freq=250" >> /boot/config.txt
 
 # === PiCamera Stuff === #
+echo "Installing Pi Camera stuff..."
+echo
+
 sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-{bin,dev,doc}
 # Append lines to /boot/config.txt to enable the PiCamera
 printf '#Enable PiCamera Interface\n %s\n %s\n' 'start_x=1' 'gpu_mem=256' | sudo tee -a /boot/config.txt
@@ -74,6 +89,9 @@ sudo pip install picamera
 sudo pip install "picamera[array]"
 
 # ==== Wireless settings ==== #
+echo "Installing and configuring wireless settings..."
+echo
+
 # Install firmware and tools
 sudo apt-get install wireless-tools wpasupplicant linux-firmware
 # Setup /etc/network/interfaces
@@ -96,6 +114,9 @@ printf 'network={\n ssid="duckietown"\n scan_ssid=1\n psk="quackquack"\n priorit
 # Select option (1) for byobu.
 
 # ==== ROS Packages ==== #
+echo "Installing additional ROS packages..."
+echo
+
 # Install additional ROS pkgs to apt-get
 sudo apt-get install ros-kinetic-{tf-conversions,cv-bridge,image-transport,camera-info-manager,theora-image-transport,image-geometry,image-proc}
 
