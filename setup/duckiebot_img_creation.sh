@@ -76,7 +76,7 @@ sudo echo "core_freq=250" >> /boot/config.txt
 echo "Installing Pi Camera stuff..."
 echo
 
-sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-{bin,dev,doc}
+sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-{bin,dev,doc} -y
 # Append lines to /boot/config.txt to enable the PiCamera
 printf '#Enable PiCamera Interface\n %s\n %s\n' 'start_x=1' 'gpu_mem=256' | sudo tee -a /boot/config.txt
 # Create custom rule to enable camera
