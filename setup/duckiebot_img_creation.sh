@@ -93,7 +93,7 @@ echo "Installing and configuring wireless settings..."
 echo
 
 # Install firmware and tools
-sudo apt-get install wireless-tools wpasupplicant linux-firmware
+sudo apt-get install wireless-tools wpasupplicant linux-firmware -y
 # Setup /etc/network/interfaces
 printf 'allow-hotplug wlan0\n auto wlan0\n iface wlan0 inet manual\n wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\n iface default inet dhcp' | sudo tee -a /etc/network/interfaces
 # Setup /etc/wpa_supplicat.conf header
@@ -118,7 +118,7 @@ echo "Installing additional ROS packages..."
 echo
 
 # Install additional ROS pkgs to apt-get
-sudo apt-get install ros-kinetic-{tf-conversions,cv-bridge,image-transport,camera-info-manager,theora-image-transport,image-geometry,image-proc}
+sudo apt-get install ros-kinetic-{tf-conversions,cv-bridge,image-transport,camera-info-manager,theora-image-transport,image-geometry,image-proc} -y
 
 # List of additional system pkgs
 sudo apt-get install libyaml-cpp-dev -y
