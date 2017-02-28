@@ -70,7 +70,7 @@ sudo usermod -a -G dialout $USER
 sudo chmod a+rw /dev/ttyS0
 
 # This is for RPi3 only
-sudo echo "core_freq=250" >> /boot/config.txt
+printf 'core_freq=250' | sudo tee -a /boot/config.txt
 
 # === PiCamera Stuff === #
 echo "Installing Pi Camera stuff..."
