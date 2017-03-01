@@ -12,13 +12,13 @@ else
     export HOTSPOT="$VEHICLE_NAME-wifi"
 
     echo "Enabling hotspot $HOTSPOT..."
-    nmcli device wifi hotspot con-name $HOTSPOT ssid $HOTSPOT band bg password quackquack
+    sudo nmcli device wifi hotspot con-name $HOTSPOT ssid $HOTSPOT band bg password quack
     echo "$HOTSPOT enabled."
 
     # if the hotspot variable already exists, we considered the hotspot as active, so we disable it
   else
     echo "Disabling hotspot $HOTSPOT..."
-    nmcli connection down $HOTSPOT
+    sudo nmcli connection down $HOTSPOT
     unset HOTSPOT
     echo "$HOTSPOT disabled."
   fi
