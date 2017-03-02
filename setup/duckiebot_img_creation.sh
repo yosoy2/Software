@@ -57,6 +57,10 @@ sudo apt-get install python-rosdep
 sudo rosdep init
 rosdep update
 
+# source setup.bash
+echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
 # === Bus and i2c ===
 #sudo apt-get install -y i2c-tools python-smbus
 #sudo usermod -a -G i2c ubuntu
