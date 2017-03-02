@@ -49,7 +49,7 @@
     </include>
 
     <!-- Wheels Driver -->
-    <include file="$(find duckiebot_wheel_driver)/launch/wheels_driver_node_rpi3.launch">
+    <include file="$(find duckiebot_driver)/launch/wheels_driver_node_rpi3.launch">
         <arg name="veh" value="$(arg veh)"/>
     </include>
 </launch>
