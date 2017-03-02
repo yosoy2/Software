@@ -31,7 +31,7 @@ sudo apt-get install openssh-server -y
 sudo apt-get install avahi-daemon avahi-discover avahi-utils -y
 
 # Sync the time
-sudo ntpdate -u us.pool.ntp.org
+#sudo ntpdate -u us.pool.ntp.org
 
 # === Extra stuff ===
 echo "Installing more packages..."
@@ -93,8 +93,8 @@ sudo pip install picamera
 sudo pip install "picamera[array]"
 
 # ==== Wireless settings ==== #
-echo "Installing and configuring wireless settings..."
-echo
+#echo "Installing and configuring wireless settings..."
+#echo
 
 # Install firmware and tools
 #sudo apt-get install wireless-tools wpasupplicant linux-firmware -y
