@@ -97,13 +97,13 @@ echo "Installing and configuring wireless settings..."
 echo
 
 # Install firmware and tools
-sudo apt-get install wireless-tools wpasupplicant linux-firmware -y
+#sudo apt-get install wireless-tools wpasupplicant linux-firmware -y
 # Setup /etc/network/interfaces
-printf 'allow-hotplug wlan0\n auto wlan0\n iface wlan0 inet manual\n wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\n iface default inet dhcp' | sudo tee -a /etc/network/interfaces
+#printf 'allow-hotplug wlan0\n auto wlan0\n iface wlan0 inet manual\n wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\n iface default inet dhcp' | sudo tee -a /etc/network/interfaces
 # Setup /etc/wpa_supplicat.conf header
-printf 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n update_config=1' | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
+#printf 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n update_config=1' | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 # Setup duckietown network SSID
-printf 'network={\n ssid="duckietown"\n scan_ssid=1\n psk="quackquack"\n priority=10\n}' | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
+#printf 'network={\n ssid="duckietown"\n scan_ssid=1\n psk="quackquack"\n priority=10\n}' | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 
 # Setup authorized keys for ssh access for duckietown
 #cd ~
