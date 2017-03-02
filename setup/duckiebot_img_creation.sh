@@ -122,7 +122,7 @@ echo "Installing additional ROS packages..."
 echo
 
 # Install additional ROS pkgs to apt-get
-sudo apt-get install ros-kinetic-{tf-conversions,cv-bridge,image-transport,camera-info-manager,theora-image-transport,image-geometry,image-proc} -y
+sudo apt-get install ros-kinetic-{tf-conversions,cv-bridge,image-transport,camera-info-manager,theora-image-transport,image-geometry,image-proc,joy} -y
 
 # List of additional system pkgs
 sudo apt-get install libyaml-cpp-dev -y
