@@ -74,7 +74,8 @@ sudo usermod -a -G dialout $USER
 sudo chmod a+rw /dev/ttyS0
 
 # This is for RPi3 only
-printf 'core_freq=250' | sudo tee -a /boot/config.txt
+printf 'core_freq=250\n' | sudo tee -a /boot/config.txt
+printf 'enable_uart=1\n' | sudo tee -a /boot/config.txt
 
 # === PiCamera Stuff === #
 echo "Installing Pi Camera stuff..."
@@ -82,7 +83,7 @@ echo
 
 sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-{bin,dev,doc} -y
 # Append lines to /boot/config.txt to enable the PiCamera
-printf '#Enable PiCamera Interface\n %s\n %s\n' 'start_x=1' 'gpu_mem=256' | sudo tee -a /boot/config.txt
+printf '#Enable PiCamera Interface\n%s\n%s\n' 'start_x=1' 'gpu_mem=256' | sudo tee -a /boot/config.txt
 # Create custom rule to enable camera
 printf 'SUBSYSTEM=="vchiq",GROUP="video",MODE="0660"' | sudo tee /etc/udev/rules.d/10-vchiq-permissions.rules
 # Add user to the video group
