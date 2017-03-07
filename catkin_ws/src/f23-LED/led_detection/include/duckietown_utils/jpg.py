@@ -1,12 +1,19 @@
 import cv2
 import numpy as np
 from duckietown_utils import logger
+
+(major, minor, _) = cv2.__version__.split(".")
 #from PIL import Image as pimg
 
 def image_cv_from_jpg(data):
     """ Returns an OpenCV BGR image from a string """
     s = np.fromstring(data, np.uint8)
-    image_cv = cv2.imdecode(s, cv2.CV_LOAD_IMAGE_COLOR)
+
+    if major=='2':
+ +      image_cv = cv2.imdecode(np_arr, cv2.CV_LOAD_IMAGE_COLOR)
+ +	else:
+ +		image_cv = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+
     if image_cv is None:
         msg = 'Could not decode image (cv2.imdecode returned None). '
         msg += 'This is usual a sign of data corruption.'
