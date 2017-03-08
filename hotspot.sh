@@ -15,7 +15,7 @@ case $1 in
     echo "Enabling hotspot $HOTSPOT..."
     if ! sudo nmcli connection up $HOTSPOT; then
       echo "Creating hotspot $HOTSPOT"
-      sudo nmcli device wifi hotspot con-name $HOTSPOT ssid $HOTSPOT band bg password quack
+      sudo nmcli device wifi hotspot con-name $HOTSPOT ssid $HOTSPOT band bg password quackquack
     fi
     echo "$HOTSPOT enabled."
     ;;
