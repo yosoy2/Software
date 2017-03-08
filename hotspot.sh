@@ -4,25 +4,27 @@
 # if the vehicle name is not set, exit
 if [ -z "$VEHICLE_NAME" ]; then
   echo "VEHICLE_NAME is not set. Please run 'source set_vehicle_name.sh' before enabling the hotspot"
+  exit 1
+fi
+ 
+# vehicle name is set, create hotspot variable and enable or disable hotspot with nmcli
+HOTSPOT="$VEHICLE_NAME-wifi"
 
-# if the vehicle name is set but no hotspot is active, enable the hotspot
-else 
-  if [ -z "$HOTSPOT" ]; then
-    # vehicle name is set, create hotspot variable and enable hotspot with nmcli
-    export HOTSPOT="$VEHICLE_NAME-wifi"
-
+case $1 in
+  on)
     echo "Enabling hotspot $HOTSPOT..."
     if ! sudo nmcli connection up $HOTSPOT; then
-      echo "Creating hotspot $HOTSPOT..."
+      echo "Creating hotspot $HOTSPOT"
       sudo nmcli device wifi hotspot con-name $HOTSPOT ssid $HOTSPOT band bg password quack
     if
     echo "$HOTSPOT enabled."
-
-    # if the hotspot variable already exists, we considered the hotspot as active, so we disable it
-  else
+    ;;
+  off)
     echo "Disabling hotspot $HOTSPOT..."
     sudo nmcli connection down $HOTSPOT
-    unset HOTSPOT
     echo "$HOTSPOT disabled."
-  fi
-fi
+    ;;
+  *)
+    echo "Usage: $0 {on|off}"
+    exit 1
+esac
