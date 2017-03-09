@@ -168,7 +168,7 @@
 		</include>
 
 		<!-- Wheel Driver -->
-		<include file="$(find dagu_car)/launch/wheels_driver_node.launch">
+		<include file="$(find duckiebot_driver)/launch/wheels_driver_node_rpi3.launch">
 			<arg name="veh" value="$(arg veh)"/>
 		</include>
 
