@@ -62,7 +62,7 @@
 	<arg name="/apriltags/local" default="false" />
 
 
-	<arg name="LED" default="true" />
+	<arg name="LED" default="false" />
 	<arg name="/LED/pattern_switch" default="false" />
 	<arg name="/LED/detector" default="false" />
 	<arg name="/LED/joystick" default="false" />
