@@ -3,7 +3,8 @@ import logging
 import os
 logging.basicConfig()
 logger = logging.getLogger(__name__)
-username = os.getenv('USER')
+#username = os.getenv('USER')
+username = "duckiebot"
 
 class MyExc(Exception):
 	pass
