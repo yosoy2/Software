@@ -26,7 +26,7 @@ class TakeImage():
         
         self.cont = 0
 
-        self.image_subscriber = rospy.Subscriber("/bender/sensors/camera_right_eye/image_raw", Image, self._process_image)
+        self.image_subscriber = rospy.Subscriber("/duckiebot/camera_node/image/raw", Image, self._process_image)
 
 
     def _process_image(self,img):
@@ -41,12 +41,12 @@ class TakeImage():
 
 
     def _take_image(self, req):
-
+        print "master"
         rgbimage = self.cv_image
         cv2.imwrite("image_"+str(self.cont)+".png",rgbimage)
 
         self.cont += 1
-
+        print "buena"
         return EmptyResponse()
 
 def main():
