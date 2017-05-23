@@ -15,6 +15,9 @@ export ROS_HOSTNAME=$HOSTNAME.local
 export DUCKIETOWN_ROOT=$HOME/duckietown
 echo
 
+echo "Setup ROS_VARIABLES"
+source $DUCKIETOWN_ROOT/ros_variables.sh
+
 echo "Building machines file..."
 make -C  $DUCKIETOWN_ROOT
 echo "...done"
