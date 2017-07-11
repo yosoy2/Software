@@ -53,7 +53,7 @@
         <xacro:tag id="202" pos="${pos_0}" rotation="135" x="2" y="0"/>
         <xacro:tag id="203" pos="${pos_0}" rotation="135" x="3" y="0"/>
         <xacro:tag id="204" pos="${pos_3}" rotation="135" x="4" y="0"/>
-        <xacro:tag id="205" pos="${pos_5}" rotation="45" x="0" y="1"/>
+        <xacro:tag id="205" pos="${pos_6}" rotation="45" x="0" y="1"/>
         <xacro:tag id="206" pos="${pos_7}" rotation="225" x="1" y="1"/>
         <xacro:tag id="207" pos="${pos_7}" rotation="225" x="2" y="1"/>
         <xacro:tag id="208" pos="${pos_4}" rotation="-120" x="3" y="1"/>
