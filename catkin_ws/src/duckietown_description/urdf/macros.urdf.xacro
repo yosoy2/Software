@@ -27,7 +27,7 @@
     <xacro:macro name="tag" params="id x y pos rotation">
         <link name="tag_${id}">
             <visual>
-                <origin xyz="-0.0254 -0.0254 0" />
+                <origin xyz="0 0 0" />
                 <geometry>
                     <mesh filename="package://duckietown_description/urdf/meshes/tags/tag_${id}.dae" />
                 </geometry>
