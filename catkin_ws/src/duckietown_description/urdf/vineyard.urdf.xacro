@@ -63,4 +63,14 @@
         <xacro:tag id="212" pos="${pos_2}" rotation="-45" x="3" y="2"/>
         <xacro:tag id="213" pos="${pos_2}" rotation="225" x="4" y="2"/>
         <xacro:tag id="214" pos="${pos_6}" rotation="-45" x="0" y="3"/>
+        <xacro:tag id="215" pos="${pos_4}" rotation="0" x="1" y="3"/>
+        <xacro:tag id="216" pos="${pos_3}" rotation="90" x="2" y="2"/>
+        <xacro:tag id="217" pos="${pos_5}" rotation="225" x="4" y="3"/>
+        <xacro:tag id="218" pos="${pos_7}" rotation="-30" x="1" y="4"/>
+        <xacro:tag id="219" pos="${pos_2}" rotation="-120" x="4" y="4"/>
+        <xacro:tag id="220" pos="${pos_2}" rotation="-90" x="3" y="4"/>
+        <xacro:tag id="221" pos="${pos_1}" rotation="-90" x="2" y="4"/>
+        <xacro:tag id="222" pos="${pos_6}" rotation="-45" x="3" y="3"/>
+        <xacro:tag id="223" pos="${pos_5}" rotation="135" x="3" y="3"/>
+        <xacro:tag id="224" pos="${pos_0}" rotation="45" x="1" y="3"/>
     </robot>
