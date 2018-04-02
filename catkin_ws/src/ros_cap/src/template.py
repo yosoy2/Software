@@ -6,7 +6,7 @@ from geometry_msgs.msg import Twist # importar mensajes de ROS tipo geometry / T
 
 
 class Template(object):
-	def__init__(self, args):
+	def __init__(self, args):
 		super(Template, self).__init__()
 		self.args = args
 
@@ -17,13 +17,13 @@ class Template(object):
 
 
 def main():
-	rospy.init_node('test') #creación y registro del nodo!
+	rospy.init_node('test') #creacion y registro del nodo!
 
-	obj = Template() # Crea un objeto del tipo Template, cuya definición se encuentra arriba
+	obj = Template('args') # Crea un objeto del tipo Template, cuya definicion se encuentra arriba
 
-	#objeto.publicar() #llama al método publicar del objeto obj de tipo Template
+	#objeto.publicar() #llama al metodo publicar del objeto obj de tipo Template
 
-	#rospy.spin() #función de ROS que evita que el programa termine -  se debe usar en  Subscribers
+	#rospy.spin() #funcion de ROS que evita que el programa termine -  se debe usar en  Subscribers
 
 
 if __name__ =='__main__':
