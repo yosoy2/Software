@@ -2,31 +2,27 @@
 # autores: eduardo y tomas
 
 import rospy #importar ros para python
-from std_msgs.msg import String, Int32 # importar mensajes de ROS tipo String y tipo Int32
-from geometry_msgs.msg import Twist # importar mensajes de ROS tipo geometry / Twist
-from sensor_msgs.msg import Joy 
+ # importar mensajes de ROS tipo String y tipo Int32 # importar mensajes de ROS tipo geometry / Twist
+from sensor_msgs.msg import Joy
 from duckietown_msgs.msg import Twist2DStamped
 
-
 class Controller(object):
+	
 	def __init__(self, args):
 		super(Controller, self).__init__()
 		self.args = args
-          	self.publisher = rospy.Publisher("/duckiebot/wheels_driver_node/wheels_cmd", Twist2DStamped, queue_size=10)
+          	self.publisher = rospy.Publisher("/duckiebot/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
 		self.subscriber = rospy.Subscriber("/duckiebot/joy", Joy, self.callback)
-		self.twist = Twist2DStamped
+		self.twist = Twist2DStamped()
 
 	def callback(self,msg):
-		num = msg.axes[1] 
-		self.twist.v=msg.axes[1]
-		self.twist.omega=0.0
+                num = msg.axes[1]
+		self.twist.v=msg.axes[1]*(-1)
+		self.twist.omega=msg.axes[3]*10
 		if(msg.buttons[1]):
-			rospy.loginfo(num)
-			self.publisher.publish(self.twist)
-		#while(num<0):
-		#	self.publisher(-1)
-		#else: self.publisher(1)
-
+			self.twist.v=0
+			self.twist.omega=0
+		self.publisher.publish(self.twist)
 
 def main():
 	rospy.init_node('test') #creacion y registro del nodo!
