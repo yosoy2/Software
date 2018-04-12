@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# autores: eduardo y tomas
 
 import rospy #importar ros para python
 from std_msgs.msg import String, Int32 # importar mensajes de ROS tipo String y tipo Int32
