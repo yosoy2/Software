@@ -1,12 +1,12 @@
 import numpy as np
 import cv2 as cv
 
-# Función de callback para switch
+# Funcion de callback para switch
 def updateBlurring(_):
     x = cv.getTrackbarPos('Tamaño', 'image')
     blurring(x)
 
-# Función de callback
+# Funcion de callback
 def blurring(x):
     global img, switch
     s = cv.getTrackbarPos(switch, 'image')
