@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 
-# Función de callback para switch
+# Funcion de callback para switch
 def updateMorpho(_):
     x = cv.getTrackbarPos('Tamaño', 'image')
     morphological(x)
@@ -12,7 +12,7 @@ def thresholding(x):
     _, thresh = cv.threshold(img, x, 255, cv.THRESH_BINARY)
     updateMorpho(0)
 
-# Función de callback
+# Funcion de callback
 def morphological(x):
     kernelTypes = [cv.MORPH_RECT, cv.MORPH_ELLIPSE, cv.MORPH_CROSS]
     global thresh, switch, k_switch
