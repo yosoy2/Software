@@ -30,7 +30,7 @@ img = cv.imread('images/duckietown.png', 1)
 # Crea ventana de nombre 'image'
 cv.namedWindow('image')
 
-# Crea trackbars para manejar el tamaño del filtro
+# Crea trackbars para manejar el tamano del filtro
 cv.createTrackbar('Tamaño', 'image', 1, 50, blurring)
 
 # Crea switch para elegir el tipo de filtro
