@@ -18,12 +18,16 @@ class Detect(object):
 	def callback(self,msg):
 		img = self.bridge.imgmsg_to_cv2(msg, "bgr8")
 		image_out = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-		mask = cv2.inRange(image_out,np.array([0,0,0]),np.array([100,255,255]))
+		mask = cv2.inRange(image_out,np.array([205,205,50]),np.array([255,255,100]))
 		kernel = np.ones((5,5),np.uint8)
 		img_out = cv2.erode(mask,kernel,iterations = 1)
 		image_out = cv2.bitwise_and(img, img, mask = img_out)
 		msgimg = self.bridge.cv2_to_imgmsg(image_out,"bgr8")
 		self.publisher.publish(msgimg)
+		contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+		x,y,w,h = cv2.boundingRect(cnt) cv2.rectangle(img, (x1,y1), (x2,y2), (0,0,0), 2)
+		image = self.bridge.cv2_to_imgmsg(image,"bgr8")
+		#self.publisher.publish(image)
 
 
 def main():
