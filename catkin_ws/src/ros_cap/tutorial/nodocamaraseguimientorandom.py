@@ -17,17 +17,21 @@ class Detect(object):
 
 	def callback(self,msg):
 		img = self.bridge.imgmsg_to_cv2(msg, "bgr8")
-		image_out = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-		mask = cv2.inRange(image_out,np.array([205,205,50]),np.array([255,255,100]))
+		imageout = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+		mask = cv2.inRange(imageout,np.array([15,100,0]),np.array([45,255,255]))
 		kernel = np.ones((5,5),np.uint8)
 		img_out = cv2.erode(mask,kernel,iterations = 1)
 		image_out = cv2.bitwise_and(img, img, mask = img_out)
-		msgimg = self.bridge.cv2_to_imgmsg(image_out,"bgr8")
-		self.publisher.publish(msgimg)
-		contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-		x,y,w,h = cv2.boundingRect(cnt) cv2.rectangle(img, (x1,y1), (x2,y2), (0,0,0), 2)
-		image = self.bridge.cv2_to_imgmsg(image,"bgr8")
-		#self.publisher.publish(image)
+		#msgimg = self.bridge.cv2_to_imgmsg(image_out,"bgr8")
+		#self.publisher.publish(msgimg)
+		hola, contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+		areas = [cv2.contourArea(c) for c in contours] #Busca todos los rectangulos en la imagen
+		max_index = np.argmax(areas)  #Busca el rectangulo con mayor area
+		cnt = contours[max_index]  #Denomina cnt a los bordes del rectangulo de mayor area
+		x,y,w,h = cv2.boundingRect(cnt)
+		cv2.rectangle(img, (x,y), (x+w,y+h), (0,0,0), 2)
+		image = self.bridge.cv2_to_imgmsg(img,"bgr8")
+		self.publisher.publish(image)
 
 
 def main():
