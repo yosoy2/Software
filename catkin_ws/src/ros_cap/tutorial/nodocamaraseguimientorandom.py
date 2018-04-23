@@ -22,23 +22,21 @@ class Detect(object):
 		kernel = np.ones((5,5),np.uint8)
 		img_out = cv2.erode(mask,kernel,iterations = 1)
 		image_out = cv2.bitwise_and(img, img, mask = img_out)
-		#msgimg = self.bridge.cv2_to_imgmsg(image_out,"bgr8")
-		#self.publisher.publish(msgimg)
 		hola, contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 		areas = [cv2.contourArea(c) for c in contours] #Busca todos los rectangulos en la imagen
 		for a in areas:
 			if a < 1000:
 				i = areas.index(a)
 				areas.remove(a)
-				areas.insert(i,0)
+				para_nada_sirvo_pero_aun_asi_doy = contours.pop(i)
 			else: None
-		max_index = np.argmax(areas)  #Busca el rectangulo con mayor area
-		#print max(areas), max_index  #Prueba
-		cnt = contours[max_index]  #Denomina cnt a los bordes del rectangulo de mayor area
-		if areas[max_index] < 1000:
-			cnt = None
-		x,y,w,h = cv2.boundingRect(cnt)
-		cv2.rectangle(img, (x,y), (x+w,y+h), (0,0,0), 2)
+		for a in areas:
+			index = areas.index(a)
+			cnt = contours[index]  #Denomina cnt a los bordes del rectangulo de mayor area
+			if areas[index] < 1000: #and hierarchy[index] == 0:
+				cnt = None
+			x,y,w,h = cv2.boundingRect(cnt)
+			cv2.rectangle(img, (x,y), (x+w,y+h), (0,0,0), 2)
 		image = self.bridge.cv2_to_imgmsg(img,"bgr8")
 		self.publisher.publish(image)
 
