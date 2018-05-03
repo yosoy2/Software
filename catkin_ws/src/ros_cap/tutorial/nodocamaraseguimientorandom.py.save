@@ -18,10 +18,9 @@ class Detect(object):
 	def callback(self,msg):
 		img = self.bridge.imgmsg_to_cv2(msg, "bgr8")
 		imageout = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-		mask = cv2.inRange(imageout,np.array([15,30,200]),np.array([45,255,255]))
+		mask = cv2.inRange(imageout,np.array([25,500]),np.array([35,255,255]))
 		kernel = np.ones((5,5),np.uint8)
-		img_out = cv2.erode(mask,kernel,iterations = 2)
-		img_out = cv2.dilate(mask,kernel,iterations = 3)
+		img_out = cv2.erode(mask,kernel,iterations = 1)
 		image_out = cv2.bitwise_and(img, img, mask = img_out)
 		hola, contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 		areas = [cv2.contourArea(c) for c in contours] #Busca todos los rectangulos en la imagen
@@ -34,7 +33,7 @@ class Detect(object):
 		for a in areas:
 			index = areas.index(a)
 			cnt = contours[index]  #Denomina cnt a los bordes del rectangulo de mayor area
-			if areas[index] < 350: #and hierarchy[index] == 0:
+			if areas[index] < 1000: #and hierarchy[index] == 0:
 				cnt = None
 			x,y,w,h = cv2.boundingRect(cnt)
 			cv2.rectangle(img, (x,y), (x+w,y+h), (0,0,0), 2)
