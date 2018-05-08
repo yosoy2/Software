@@ -4,15 +4,17 @@ from sensor_msgs.msg import Image
 import cv2
 import numpy as np
 from cv_bridge import CvBridge
+from geometry_msgs.msg import Point
 
 class Detect(object):
 	
 	def __init__(self, args):
 		super(Detect, self).__init__()
 		self.args = args
-          	self.publisher = rospy.Publisher("/duckiebot/Yo_solo_hago_un_cuadradito_al_rededor_de_alguna_wea_amarilla", Image, queue_size=10)
+        	self.publisher = rospy.Publisher("/duckiebot/Yo_solo_hago_un_cuadradito_al_rededor_de_alguna_wea_amarilla", Image, queue_size=10)
 		self.subscriber = rospy.Subscriber("/duckiebot/camera_node/image/raw", Image, self.callback)
 		self.publisher2 = rospy.Publisher("/duckiebot/Hola",Image, queue_size=10)
+		self.publisher3 = rospy.Publisher("/duckiebot/PatoUbicacion", Point, queue_size=10)
 		#self.publisher3 = rospy.Publisher("/duckiebot/Coordenadas", ,)
 		self.image = Image()
 		self.bridge = CvBridge()
@@ -20,6 +22,11 @@ class Detect(object):
 	def callback(self,msg):
 		aa = 20
 		bb = 20
+		AnchoPato = 15
+		fx = 0.1
+		fy = 0.1
+		cx = 0.1
+		cy = 0.1
 		img = self.bridge.imgmsg_to_cv2(msg, "bgr8")
 		imageout = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 		mask = cv2.inRange(imageout,np.array([0,210,100]),np.array([30,255,200]))
@@ -37,9 +44,14 @@ class Detect(object):
 			else:
 				x,y,w,h = cv2.boundingRect(cnt)
 				cv2.rectangle(img, (x,y), (x+w,y+h), (0,0,0), 2)
-				#if w<aa or h<bb:
-				#	None
-				#else:
+				if w<aa or h<bb:
+					None
+				else:
+					z = (fx * AnchoPato)/w
+					u = x + (w/2)
+					v = y + (h/2)
+					UbP = ((u-z*cx)/fx, (z-z*cy)/fy, z)
+					self.publisher3.publish(UbP)
 				print "w = ", w, "h = ", h, "area = ", a
 		image = self.bridge.cv2_to_imgmsg(img,"bgr8")
 		self.publisher.publish(image)

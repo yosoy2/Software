@@ -11,7 +11,7 @@ class Controller(object):
 	def __init__(self, args):
 		super(Controller, self).__init__()
 		self.args = args
-          	self.publisher = rospy.Publisher("/duckiebot/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
+          	self.publisher = rospy.Publisher("/duckiebot/Control", Twist2DStamped, queue_size=10)
 		self.subscriber = rospy.Subscriber("/duckiebot/joy", Joy, self.callback)
 		self.twist = Twist2DStamped()
 
