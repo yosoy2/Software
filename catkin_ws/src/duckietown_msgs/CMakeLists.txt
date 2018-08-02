@@ -100,6 +100,9 @@ add_message_files(
   ObstacleImageDetectionList.msg
   ObstacleProjectedDetection.msg
   ObstacleProjectedDetectionList.msg
+  lidar_2.msg
+  SuperMensajeLidarConAnguloDistanciaYTiempoDeRespuestaElCualPoseeUnNombreHiperLargoPorqueSomosUnCuartetoSuperPoderosoElCualPuedeHaceloYQuackQuack.msg
+  lidar_9.msg
 
 )
 

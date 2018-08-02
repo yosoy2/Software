@@ -11,18 +11,20 @@ class Controller(object):
 	def __init__(self, args):
 		super(Controller, self).__init__()
 		self.args = args
-          	self.publisher = rospy.Publisher("/duckiebot/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
+        self.publisher = rospy.Publisher("/duckiebot/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
 		self.subscriber = rospy.Subscriber("/duckiebot/joy", Joy, self.callback)
 		self.twist = Twist2DStamped()
+		self.list = []
 
 	def callback(self,msg):
-                num = msg.axes[1]
-		self.twist.v=msg.axes[1]*(-1)
+        num = msg.axes[1]
+		self.list[i]=msg.distancia		
+  		self.twist.v=msg.axes[1]*(-1)
 		self.twist.omega=msg.axes[3]*10
 		if(msg.buttons[1]):
 			self.twist.v=0
 			self.twist.omega=0
-		self.publisher.publish(self.twist)
+			self.publisher.publish(self.twist)
 
 def main():
 	rospy.init_node('test') #creacion y registro del nodo!

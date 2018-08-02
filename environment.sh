@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 echo "Activating ROS "$ROS_DISTRO"..."
 source /opt/ros/$ROS_DISTRO/setup.bash
