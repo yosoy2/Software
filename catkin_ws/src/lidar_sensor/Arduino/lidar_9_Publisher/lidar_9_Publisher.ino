@@ -16,7 +16,7 @@
 #define angulo_inicial 0
 #define angulo_final 180
 #define angulo_paso 10
-#define tiempo_espera 20
+#define tiempo_espera 15
 
 ros::NodeHandle nh ;
 
@@ -69,7 +69,7 @@ void loop() {
     delay(tiempo_espera);                       // waits 15ms for the servo to reach the position
   }
 
-  for (angulo = angulo_final; angulo >= angulo_inicial+angulo_paso; angulo -= angulo_paso) { // goes from 180 degrees to 0 degrees
+    for (angulo = angulo_final; angulo >= angulo_inicial+angulo_paso; angulo -= angulo_paso) { // goes from 180 degrees to 0 degrees
     servo_lidar.write(angulo);              // tell servo to go to position in variable 'pos'
     x=Distancia(1, 0, I2C_Address);
     str_msg.angulo = angulo;

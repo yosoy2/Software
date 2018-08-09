@@ -103,6 +103,7 @@ add_message_files(
   lidar_2.msg
   SuperMensajeLidarConAnguloDistanciaYTiempoDeRespuestaElCualPoseeUnNombreHiperLargoPorqueSomosUnCuartetoSuperPoderosoElCualPuedeHaceloYQuackQuack.msg
   lidar_9.msg
+  laserScan_1.msg
 
 )
 
