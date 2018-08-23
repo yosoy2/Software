@@ -2,7 +2,7 @@
 # autores: Pedro y Tomas
 
 import rospy
-#porno
+#porno yweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 from duckietown_msgs.msg import Twist2DStamped
 from duckietown_msgs.msg import Lidar
 
