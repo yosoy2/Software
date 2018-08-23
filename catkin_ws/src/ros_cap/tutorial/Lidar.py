@@ -4,7 +4,7 @@
 import rospy
 
 from duckietown_msgs.msg import Twist2DStamped
-from duckietown_msgs.msg import lidar9
+from duckietown_msgs.msg import Lidar
 
 from geometry_msgs.msg import Point
 from sensor_msgs.msg import Joy
@@ -29,7 +29,7 @@ class Controller(object):
         
         self.twist = Twist2DStamped()
 
-        self.anguloGiro =
+        self.anguloGiro = 10
 
         n = (msg.anglMax-msg.anglMin)/msg.anglDelta + 1
         self.list = [0]*n
@@ -48,7 +48,7 @@ class Controller(object):
         # Definicion de variables.
         tiempoBarrido = ((msg.anglMax-msg.anglMin)/msg.anglDelta)
             * msg.tiempo
-        velocidadMaxima = 
+        velocidadMaxima = 250
         indiceDato = (msg.angulo-msg.anglMin)/msg.anglDelta
         
 
@@ -60,7 +60,7 @@ class Controller(object):
         # Actualizacion de lista de distancias.
         if self.twist.omega == 0:
             for i in range(L):
-                L[i] = L[i] + self.twist.v * msg.anglDelta     
+                L[i] = L[i] + self.twist.v * 0.015     
         else:
             self.anguloGiro = self.anguloGiro + self.twist.omega
             if int(anguloGiro) == 1:

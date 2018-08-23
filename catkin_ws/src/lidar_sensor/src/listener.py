@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 import rospy
-from duckietown_msgs.msg import lidar_9
+from duckietown_msgs.msg import Lidar
 from sensor_msgs.msg import LaserScan
 
 def rads(angle):

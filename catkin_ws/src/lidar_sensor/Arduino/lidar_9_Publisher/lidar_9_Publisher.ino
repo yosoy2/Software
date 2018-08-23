@@ -8,7 +8,7 @@
 #define reinicio 500
 
 #include <ros.h>
-#include <duckietown_msgs/lidar_9.h>
+#include <duckietown_msgs/Lidar.h>
 #include <I2C.h>
 #include <Servo.h>
 
@@ -20,7 +20,7 @@
 
 ros::NodeHandle nh ;
 
-duckietown_msgs::lidar_9 str_msg ;
+duckietown_msgs::Lidar str_msg ;
 ros::Publisher lidarTopic("lidarTopic",&str_msg) ;
 
 Servo servo_lidar;
