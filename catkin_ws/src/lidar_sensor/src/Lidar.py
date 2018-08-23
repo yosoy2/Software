@@ -25,7 +25,7 @@ class Controller(object):
         self.subscriberJoy = rospy.Subscriber("/duckiebot/joy", Joy,
             self.LecturaJoy)
         self.subscriberLidar = rospy.Subscriber("/duckiebot/lidarTopic",
-            lidar9, self.LecturaLidar)
+            Lidar, self.LecturaLidar)
         
         self.twist = Twist2DStamped()
 
@@ -46,8 +46,7 @@ class Controller(object):
         
     def LecturaLidar(self,msg):
         # Definicion de variables.
-        tiempoBarrido = ((msg.anglMax-msg.anglMin)/msg.anglDelta)
-            * msg.tiempo
+        tiempoBarrido = ((msg.anglMax-msg.anglMin)/msg.anglDelta)* msg.tiempo
         velocidadMaxima = 250
         indiceDato = (msg.angulo-msg.anglMin)/msg.anglDelta
         
@@ -78,7 +77,7 @@ class Controller(object):
         # Distancia de objeto mas cercano.
         indicesCentral = (msg.anglMax - msg.anglMin)/(2 * msg.anglDelta)
         G = []
-        for indice > indiceCentral - 3 and indice < indiceCentral + 3:
+        while indice > indiceCentral - 3 and indice < indiceCentral + 3:
             G[indice] = L[indice]
         distanciaMin = min(i in G)
 
