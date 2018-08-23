@@ -25,11 +25,13 @@ class Controller(object):
         self.subscriberJoy = rospy.Subscriber("/duckiebot/joy", Joy,
             self.LecturaJoy)
         self.subscriberLidar = rospy.Subscriber("/duckiebot/lidarTopic",
-            Lidar, self.LecturaLidar)
+            lidar9, self.LecturaLidar)
         
         self.twist = Twist2DStamped()
 
         self.anguloGiro = 10
+
+        n = (msg.anglMax-msg.anglMin)/msg.anglDelta + 1
         self.list = [0]*n
 
 
@@ -44,7 +46,6 @@ class Controller(object):
         
     def LecturaLidar(self,msg):
         # Definicion de variables.
-        n = (msg.anglMax-msg.anglMin)/msg.anglDelta + 1
         tiempoBarrido = ((msg.anglMax-msg.anglMin)/msg.anglDelta)
             * msg.tiempo
         velocidadMaxima = 250
