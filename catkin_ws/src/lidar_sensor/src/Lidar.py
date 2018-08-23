@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 <<<<<<< HEAD
 #!/usr/bin/env python
@@ -104,9 +106,11 @@ def main():
 if __name__ =='__main__':
     main()
 =======
-"""
+
 
 #!/usr/bin/env python
+"""
+
 # autores: Pedro y Tomas
 
 import rospy
