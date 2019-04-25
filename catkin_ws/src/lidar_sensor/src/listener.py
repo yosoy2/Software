@@ -13,7 +13,7 @@ class LidarProccesing(object):
 	
 	def __init__(self):
 		self.pub=rospy.Publisher('/lidar_rviz/',  LaserScan , queue_size=1)
-		self.subs=rospy.Subscriber('lidarTopic',lidar_9, self.callback)
+		self.subs=rospy.Subscriber('lidarTopic',Lidar, self.callback)
 		self.laser = LaserScan()
 		self.laser.angle_increment = rads(10)          
 		self.laser.angle_max = rads(-90)  #grados 
